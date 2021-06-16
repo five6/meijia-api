@@ -1,14 +1,20 @@
-import { Controller, Get, Param, Req } from '@nestjs/common';
+import { Controller, Get, Param, Post, Request } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { ObjectId } from 'mongoose';
-import { User } from '../schema/user.schema';
+import { User } from './user.schema';
 import { UserService } from './user.service';
 
-@Controller('users')
+@Controller('api/v1/users')
 @ApiTags('用户接口')
 @ApiBearerAuth()
 export class UserController {
   constructor(private readonly userService: UserService) { }
+
+
+  @Post('signup')
+  async createUser(@Request() req): Promise<any> {
+    return this.userService.signup();
+  }
 
   @Get()
   async findAll(): Promise<User[]> {
