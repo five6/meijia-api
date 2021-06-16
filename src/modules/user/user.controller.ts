@@ -8,8 +8,7 @@ import { UserService } from './user.service';
 @ApiTags('用户接口')
 @ApiBearerAuth()
 export class UserController {
-  constructor(private readonly userService: UserService) { }
-
+  constructor(private readonly userService: UserService) {}
 
   @Post('signup')
   async createUser(@Request() req): Promise<any> {

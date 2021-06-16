@@ -12,9 +12,12 @@ import { LocalStrategy } from './local.strategy';
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),
-    JwtModule.register({ secret: jwtConstants.secret,  signOptions: { expiresIn: '3600s' }, })
+    JwtModule.register({
+      secret: jwtConstants.secret,
+      signOptions: { expiresIn: '3600s' },
+    }),
   ],
   providers: [AuthService, UserService, JwtStrategy, LocalStrategy],
-  controllers: [AuthController]
+  controllers: [AuthController],
 })
 export class AuthModule {}

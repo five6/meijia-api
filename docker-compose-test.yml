@@ -1,0 +1,12 @@
+version: '1.0'
+
+services:
+  main:
+    container_name: cm_meijia
+    build:
+      context: .
+    ports:
+      - 8080:8080
+    env_file:
+      - .env.test
+

@@ -1,3 +1,3 @@
 export const jwtConstants = {
-    secret: 'cmmeijia-secretKey',
-  };
+  secret: 'cmmeijia-secretKey',
+};
