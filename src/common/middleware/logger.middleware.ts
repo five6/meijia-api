@@ -7,16 +7,16 @@ import { pick, omit } from 'lodash';
 const pwcFormat = format.printf(({ level, message, meta, timestamp }) => {
   const _meta = meta
     ? JSON.stringify(
-        omit(meta, [
-          // 'req.headers.jwt',
-          'req.headers.cookie',
-          'req.method',
-          'req.httpVersion',
-          'req.url',
-        ]),
-        null,
-        4,
-      )
+      omit(meta, [
+        // 'req.headers.jwt',
+        'req.headers.cookie',
+        'req.method',
+        'req.httpVersion',
+        'req.url',
+      ]),
+      null,
+      4,
+    )
     : '';
   return `${timestamp} ${level}: ${message} ${_meta}`;
 });
