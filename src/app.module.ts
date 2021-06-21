@@ -10,7 +10,7 @@ import { LoggerModule } from './modules/logger/logger.module';
     MongooseModule.forRoot('mongodb://localhost:27017/meijia'),
     UserModule,
     AuthModule,
-    LoggerModule
+    LoggerModule,
   ],
   controllers: [AppController],
   providers: [AppService],

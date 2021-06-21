@@ -1,4 +1,3 @@
-import { Injectable, Scope } from '@nestjs/common';
 import { Logger } from '@nestjs/common';
 import { logger } from '../../common/middleware/logger.middleware';
 
