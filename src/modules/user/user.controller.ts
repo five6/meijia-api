@@ -1,8 +1,10 @@
-import { Controller, Get, Param, Post, Request } from '@nestjs/common';
+import {Body, Controller, Get, Param, Post, Request} from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { ObjectId } from 'mongoose';
 import { User } from './user.schema';
 import { UserService } from './user.service';
+import {CreateCatDto} from "../../../../nestjs/sample/06-mongoose/src/cats/dto/create-cat.dto";
+import {CreateUserDto} from "./dto/create-user.dto";
 
 @Controller('api/v1/users')
 @ApiTags('用户接口')
@@ -11,8 +13,8 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post('signup')
-  async createUser(@Request() req): Promise<any> {
-    return this.userService.signup();
+  async createUser(@Body() createUserDto: CreateUserDto): Promise<any> {
+    return this.userService.signUp(createUserDto);
   }
 
   @Get()
