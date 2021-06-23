@@ -26,7 +26,6 @@ COPY ".env.stage" ./
 COPY ".env.prod" ./ 
 COPY ./tsconfig.build.json .
 COPY ./tsconfig.json .
-COPY ./prebuild.js .
 
 RUN npm run build
 

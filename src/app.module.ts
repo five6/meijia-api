@@ -1,18 +1,18 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { UserModule } from './modules/user/user.module';
-import { AuthModule } from './modules/auth/auth.module';
-import { LoggerModule } from './modules/logger/logger.module';
+import { AdminModule } from './module/admin/admin.module';
+import { ApiModule } from './module/api/api.module';
+import { FilesModule } from './module/common/file/files.module';
+import { MongooseModule } from '@nestjs/mongoose';
+
+import { PublicModule } from './module/common/public/public.module';
+
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost:27017/meijia'),
-    UserModule,
-    AuthModule,
-    LoggerModule,
+    PublicModule, AdminModule, ApiModule, FilesModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [],
+  exports: [],
 })
-export class AppModule {}
+export class AppModule { }

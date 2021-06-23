@@ -1,14 +1,12 @@
-import { Controller, Get } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
-import { AppService } from './app.service';
+import { Controller, Get, UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from './module/common/auth/guards/jwt-auth.guard';
 
-@ApiTags('主页')
-@Controller('/api/v1')
+@Controller()
+@UseGuards(JwtAuthGuard)
 export class AppController {
-  constructor(private readonly appService: AppService) {}
 
-  @Get('/echo')
-  echo(): string {
-    return this.appService.echo();
+  @Get()
+  getHello(): string {
+    return 'Hello World!';
   }
 }
