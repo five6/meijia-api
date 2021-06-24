@@ -1,5 +1,4 @@
 export class Config {
-
   // 文件上传保存地址
   static uploadDir = 'upload';
 

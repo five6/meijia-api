@@ -7,9 +7,13 @@ import * as cookieParser from 'cookie-parser';
 import * as session from 'express-session';
 import { HttpExceptionFilter } from './filters/http-exception.filter';
 import { Config } from './common/config/config';
+import { MjLogger } from './service/logger/logger.service';
+import { logger } from './middleware/logger.middleware';
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
+    logger: new MjLogger(),
+  });
 
   // 配置静态资源目录
   app.useStaticAssets(path.join(__dirname, '..', 'public'));
@@ -28,22 +32,25 @@ async function bootstrap() {
   app.useGlobalFilters(new HttpExceptionFilter());
 
   // 配置session的中间件
-  app.use(session({
-    secret: 'keyboard cat',
-    resave: true, // 每次请求都重新设置session cookie
-    saveUninitialized: true, // 无论有没有session cookie，每次请求都设置个session cookie
-    cookie: { maxAge: 1000 * 60 * 30, httpOnly: true },
-    rolling: true,
-  }));
+  app.use(
+    session({
+      secret: 'keyboard cat',
+      resave: true, // 每次请求都重新设置session cookie
+      saveUninitialized: true, // 无论有没有session cookie，每次请求都设置个session cookie
+      cookie: { maxAge: 1000 * 60 * 30, httpOnly: true },
+      rolling: true,
+    }),
+  );
   const options = new DocumentBuilder()
     .setTitle('美甲后台接口')
     .setDescription('接口描述')
     .setVersion('1.0')
     .addTag('美甲')
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('docs', app, document);
-
+  logger.info(process.env.NODE_ENV);
   await app.listen(7000);
 }
 bootstrap();

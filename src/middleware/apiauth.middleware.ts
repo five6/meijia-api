@@ -3,10 +3,13 @@ import { Request, Response } from 'express';
 import { UserService } from '../service/user/user.service';
 
 @Injectable()
-export class ApiAuthMiddleware implements NestMiddleware<Request|any, Response> {
+export class ApiAuthMiddleware
+  implements NestMiddleware<Request | any, Response>
+{
   constructor(private readonly userService: UserService) {}
   // tslint:disable-next-line:ban-types
-  async use(req: Request|any, res: Response, next: Function) {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  async use(req: Request | any, res: Response, next: Function) {
     const token = req.header('authorization');
     if (!token) {
       next();

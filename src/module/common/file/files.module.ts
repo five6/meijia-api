@@ -6,13 +6,13 @@ import { GridFsMulterConfigService } from './multer-config.service';
 import { FilesService } from '././files.service';
 
 @Module({
-    imports: [
-        MulterModule.registerAsync({
-            useClass: GridFsMulterConfigService,
-        }),
-    ],
-    controllers: [FilesController],
-    providers: [GridFsMulterConfigService, FilesService],
-    exports: [FilesService]
+  imports: [
+    MulterModule.registerAsync({
+      useClass: GridFsMulterConfigService,
+    }),
+  ],
+  controllers: [FilesController],
+  providers: [GridFsMulterConfigService, FilesService],
+  exports: [FilesService],
 })
 export class FilesModule {}

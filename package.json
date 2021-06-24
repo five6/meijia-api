@@ -37,6 +37,7 @@
     "@nestjs/platform-express": "^7.6.15",
     "@nestjs/platform-socket.io": "^7.6.18",
     "@nestjs/swagger": "^4.8.1",
+    "@nestjs/typeorm": "^7.1.5",
     "@nestjs/websockets": "^7.6.18",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
@@ -59,7 +60,10 @@
     "rxjs": "^6.6.6",
     "svg-captcha": "^1.4.0",
     "swagger-ui-express": "^4.1.6",
-    "util.promisify": "^1.1.1"
+    "typeorm": "^0.2.34",
+    "util.promisify": "^1.1.1",
+    "winston": "^3.3.3",
+    "winston-daily-rotate-file": "^4.5.5"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.6.0",
