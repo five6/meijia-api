@@ -8,7 +8,6 @@ import * as session from 'express-session';
 import { HttpExceptionFilter } from './filters/http-exception.filter';
 import { Config } from './common/config/config';
 import { MjLogger } from './service/logger/logger.service';
-import { logger } from './middleware/logger.middleware';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
@@ -50,7 +49,6 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('docs', app, document);
-  logger.info(process.env.NODE_ENV);
   await app.listen(7000);
 }
 bootstrap();
