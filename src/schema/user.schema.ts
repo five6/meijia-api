@@ -38,7 +38,7 @@ const _UserSchema = new mongoose.Schema({
 
 _UserSchema.index({ username: -1, email: -1, mobile: 1 });
 
-_UserSchema.methods = {
+_UserSchema.methods = <any>{
   authenticate(password) {
     return this.encryptPassword(password) === this.password;
   },

@@ -1,11 +1,11 @@
-import {Injectable, Logger} from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import * as svgCaptcha from 'svg-captcha';
 import * as crypto from 'crypto';
-import {CryptoRandomStringType} from '../../common/enum/CryptoRandomStringType';
-import * as cryptoRandomString from 'crypto-random-string';
+import { CryptoRandomStringType } from '../../common/enum/CryptoRandomStringType';
+import cryptoRandomString from 'crypto-random-string';
 import * as _ from 'lodash';
 import * as nodemailer from 'nodemailer';
-import {Config} from '../../common/config/config';
+import { Config } from '../../common/config/config';
 
 @Injectable()
 export class ToolsService {
@@ -36,6 +36,7 @@ export class ToolsService {
         return crypto.createHash('md5').update(str).digest('hex');
     }
     getRandomUrlString() {
+        // @ts-ignore
         return cryptoRandomString({length: 64, type: CryptoRandomStringType.urlSsafe});
     }
     async sendEmail(mail: string, title: any, body: any) {

@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { MulterModuleOptions, MulterOptionsFactory } from '@nestjs/platform-express';
-import * as GridFsStorage from 'multer-gridfs-storage';
+import { GridFsStorage } from 'multer-gridfs-storage';
 import { Config } from '../../../common/config/config';
 @Injectable()
 export class GridFsMulterConfigService implements MulterOptionsFactory {
-    gridFsStorage: GridFsStorage;
+    gridFsStorage: any;
     constructor() {
         this.gridFsStorage = new GridFsStorage({
             url: Config.MONGO_FILES,
