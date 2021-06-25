@@ -8,14 +8,15 @@ import * as _ from 'lodash';
 
 @Injectable()
 export class UserService {
+
   logger = new Logger();
-  constructor(@InjectModel('User') private readonly userModel,  private toolService: ToolsService) { }
+  constructor(@InjectModel('User') private readonly userModel, private toolService: ToolsService) { }
 
   async validateAccount(unValidateEmailToken: string) {
-    const u = await this.userModel.findOne({unValidateEmailToken }).lean();
-    if(! u) throw new NotFoundException('找不到此用户，请通过发件人联系管理员！');
-    else if(new Date().getTime() - u.registerTime > 86400000) {
-      throw new NotAcceptableException('注册时长超过一天，不允许激活。请通过发件人联系管理员！');
+    const u = await this.userModel.findOne({ unValidateEmailToken }).lean();
+    if (!u) throw new NotFoundException('找不到此用户，请联系管理员！');
+    else if (new Date().getTime() - u.registerTime > 86400000) {
+      throw new NotAcceptableException('注册时长超过一天，不允许激活。请联系管理员！');
     } else {
       return await this.userModel.updateOne({ _id: u._id }, {
         $set: {
@@ -28,9 +29,9 @@ export class UserService {
   }
 
   async findOne(user: any) {
-    const u = await this.userModel.findOne({$or: [{ username: user.username }, {email: user.username }]}).exec();
+    const u = await this.userModel.findOne({ $or: [{ username: user.username }, { email: user.username }] }).exec();
     if (u && u.authenticate(user.password)) {
-        return u;
+      return u;
     }
     return false;
   }
@@ -59,7 +60,7 @@ export class UserService {
   }
 
   async getUserByToken(token: string) {
-    const user = await this.userModel.findOne({jwtToken: token.replace('Bearer ', '')}).lean();
+    const user = await this.userModel.findOne({ jwtToken: token.replace('Bearer ', '') }).lean();
     if (user) {
       return {
         id: user._id,
@@ -76,6 +77,10 @@ export class UserService {
 
   async update(userDto: any) {
     return await this.userModel.updateOne({ _id: userDto._id }, { $set: userDto });
+  }
+
+  getById(userId: any): any {
+    throw new Error('Method not implemented.');
   }
 
 }

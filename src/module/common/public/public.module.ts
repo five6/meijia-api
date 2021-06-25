@@ -7,6 +7,7 @@ import { MongooseModule } from '@nestjs/mongoose';
     MongooseModule.forRoot(Config.MONGO_DB, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
+      useCreateIndex: true
     }),
   ],
   providers: [],
