@@ -8,6 +8,8 @@ import * as session from 'express-session';
 import { HttpExceptionFilter } from './filters/http-exception.filter';
 import { Config } from './common/config/config';
 import { MjLogger } from './service/logger/logger.service';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {

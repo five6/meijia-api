@@ -33,7 +33,7 @@ export class ChatGateway implements OnGatewayConnection {
 
     this.server.sockets.emit('receive_message', {
       content,
-      author
+      author,
     });
   }
 }
